@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using MahApps.Metro.Controls;
 
 namespace cpustress
 {
@@ -8,7 +9,7 @@ namespace cpustress
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private List<ThreadPool_WorkerFunction> _tasks = new List<ThreadPool_WorkerFunction>();
 
@@ -16,7 +17,7 @@ namespace cpustress
         {
             InitializeComponent();
             sliderCPU.Maximum = SystemInfo.GetNumProcessors();
-            this.Title = string.Format("{0} \t (Machine: {1})", this.Title, SystemInfo.GetComputerName());
+            this.Title = string.Format("{0} ({1})", this.Title, SystemInfo.GetComputerName());
         }
 
         private void sliderCPU_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -44,6 +45,14 @@ namespace cpustress
                     _tasks.RemoveAt(idx);
                 }
             }
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            AboutBox dialog = new AboutBox();
+            dialog.Owner = this;
+            dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            dialog.ShowDialog();
         }
     }
 }

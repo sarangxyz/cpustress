@@ -1,9 +1,10 @@
-﻿<Window x:Class="cpustress.MainWindow"
+﻿<Controls:MetroWindow x:Class="cpustress.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cpustress"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="CPU Stressing Utility" Height="350" Width="450">
     <Window.Resources>
@@ -33,14 +34,15 @@
                     AutoToolTipPlacement="BottomRight"
                     ValueChanged="sliderCPU_ValueChanged"
                     Minimum="0" Maximum="4">
-                <Slider.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
-                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlDarkDarkBrushKey}" Color="Silver" />
-                </Slider.Resources>
             </Slider>
         </DockPanel>
         <DockPanel Grid.Row="0" Grid.Column="1">
             
         </DockPanel>
     </Grid>
-</Window>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="About" Click="AboutButton_Click" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+</Controls:MetroWindow>
