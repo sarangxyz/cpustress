@@ -40,7 +40,7 @@ namespace cpustress
 
             PerformanceInfo.GetSystemTimes(out idleTime1, out krnlTime1, out userTime1);
 
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(50);
 
             System.Runtime.InteropServices.ComTypes.FILETIME idleTime2, krnlTime2, userTime2;
             PerformanceInfo.GetSystemTimes(out idleTime2, out krnlTime2, out userTime2);
