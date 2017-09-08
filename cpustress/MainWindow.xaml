@@ -12,7 +12,7 @@
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
-        Title="CPU Stressing Utility" Height="350" Width="420" ResizeMode="CanMinimize">
+        Title="CPU Stressing Utility" Height="350" Width="400" ResizeMode="CanMinimize">
     
     <Window.Resources>
         <local:MinimumRangeSelectorConverter x:Key="MinRngSelector" />
@@ -35,17 +35,21 @@
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="80" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="1" Grid.Column="0" Margin="5">
-            <Label>Load Thds:</Label>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
-                <TextBlock  Text="{Binding Value, ElementName=sliderCPU, StringFormat={}{0:0}}"
-                            VerticalAlignment="Center"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" >
+                <TextBlock FontFamily="Consolas" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" >Thds:</TextBlock>
+                <TextBlock FontFamily="Consolas" FontSize="16" Text="{Binding Value, ElementName=sliderCPU, StringFormat={}{0:0}}"
+                                HorizontalAlignment="Center" VerticalAlignment="Center" />
             </StackPanel>
         </DockPanel>
-        <DockPanel Grid.Row="0" Grid.Column="0" Margin="10">
+        <DockPanel Grid.Row="1" Grid.Column="1" Margin="5">
+            <Label Name="_cpuLabel" DockPanel.Dock="Top"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Consolas" FontSize="16">CPU</Label>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="0" Grid.Column="0" Margin="20,10,10,10">
             <Slider Name="sliderCPU" TickPlacement="BottomRight" Margin="10" Foreground="{DynamicResource HighlightBrush}"
                     IsSnapToTickEnabled="True" Orientation="Vertical" Padding="5"
                     IsSelectionRangeEnabled="True" 
@@ -53,12 +57,10 @@
                     SelectionEnd="{Binding Maximum, ElementName=sliderCPU, Converter={StaticResource MaxRngSelector}}" 
                     AutoToolTipPlacement="BottomRight"
                     ValueChanged="sliderCPU_ValueChanged"
-                    Minimum="0" Maximum="4">
+                    Minimum="0" Maximum="8">
             </Slider>
         </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="1">
-            <Label Name="_cpuLabel" DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Center" FontFamily="Consolas" FontSize="16">CPU</Label>
-        </DockPanel>
+        
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="10" >
             <lvc:AngularGauge Name="_cpuDial" Margin="10, 10, 10, 0" 
                 TicksStep="5" LabelsStep="10"
