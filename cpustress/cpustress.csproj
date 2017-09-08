@@ -74,6 +74,7 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CPUUsage.cs" />
     <Compile Include="PerformanceInfo.cs" />
     <Compile Include="SystemInfo.cs" />
     <Compile Include="ThreadPool_WorkhorseFunction.cs" />

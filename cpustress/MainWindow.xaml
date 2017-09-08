@@ -5,12 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cpustress"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="CPU Stressing Utility" Height="350" Width="450">
+        TitleCharacterCasing="Normal"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        WindowStartupLocation="CenterScreen"
+        Title="CPU Stressing Utility" Height="350" Width="450" ResizeMode="CanMinimize">
+    
     <Window.Resources>
         <local:MinimumRangeSelectorConverter x:Key="MinRngSelector" />
         <local:MaximumRangeSelectorConverter x:Key="MaxRngSelector" />
+        <Style TargetType="lvc:AngularGauge">
+            <Setter Property="NeedleFill" Value="{DynamicResource HighlightBrush}"></Setter>
+            <Setter Property="SectionsInnerRadius" Value=".6"></Setter>
+        </Style>
     </Window.Resources>
+    
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="About" Click="AboutButton_Click" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -21,12 +39,12 @@
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Margin="5">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
-                <Label>#CPU Threads: </Label>
+                <Label>Load Threads: </Label>
                 <TextBlock  Text="{Binding Value, ElementName=sliderCPU, StringFormat={}{0:0}}"
                             VerticalAlignment="Center"/>
 
             </StackPanel>
-            <Slider Name="sliderCPU" TickPlacement="BottomRight" Margin="10" Foreground="Black"
+            <Slider Name="sliderCPU" TickPlacement="BottomRight" Margin="10" Foreground="{DynamicResource HighlightBrush}"
                     IsSnapToTickEnabled="True" Orientation="Vertical" Padding="5"
                     IsSelectionRangeEnabled="True" 
                     SelectionStart="{Binding Maximum, ElementName=sliderCPU, Converter={StaticResource MinRngSelector}}" 
@@ -36,13 +54,14 @@
                     Minimum="0" Maximum="4">
             </Slider>
         </DockPanel>
-        <DockPanel Grid.Row="0" Grid.Column="1">
-            
+        <DockPanel Grid.Row="0" Grid.Column="1" >
+            <Label Name="_cpuLabel" DockPanel.Dock="Bottom" Margin="5" HorizontalAlignment="Center" FontFamily="Consolas" FontSize="16">CPU</Label>
+            <lvc:AngularGauge Name="_cpuDial" Margin="10, 10, 10, 0">
+                <lvc:AngularGauge.Sections>
+                    <lvc:AngularSection FromValue="0" ToValue="100"   Fill="#fffafa"></lvc:AngularSection>
+                </lvc:AngularGauge.Sections>
+            </lvc:AngularGauge>
         </DockPanel>
     </Grid>
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="About" Click="AboutButton_Click" />
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
+    
 </Controls:MetroWindow>
