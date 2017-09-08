@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cpustress"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="CPU Stressing Utility" Height="350" Width="450">
+    <Window.Resources>
+        <local:MinimumRangeSelectorConverter x:Key="MinRngSelector" />
+        <local:MaximumRangeSelectorConverter x:Key="MaxRngSelector" />
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.Column="0" Margin="5">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                <Label>#CPU Threads: </Label>
+                <TextBlock  Text="{Binding Value, ElementName=sliderCPU, StringFormat={}{0:0}}"
+                            VerticalAlignment="Center"/>
+
+            </StackPanel>
+            <Slider Name="sliderCPU" TickPlacement="BottomRight" Margin="10" Foreground="Black"
+                    IsSnapToTickEnabled="True" Orientation="Vertical" Padding="5"
+                    IsSelectionRangeEnabled="True" 
+                    SelectionStart="{Binding Maximum, ElementName=sliderCPU, Converter={StaticResource MinRngSelector}}" 
+                    SelectionEnd="{Binding Maximum, ElementName=sliderCPU, Converter={StaticResource MaxRngSelector}}" 
+                    AutoToolTipPlacement="BottomRight"
+                    ValueChanged="sliderCPU_ValueChanged"
+                    Minimum="0" Maximum="4">
+                <Slider.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlDarkDarkBrushKey}" Color="Silver" />
+                </Slider.Resources>
+            </Slider>
+        </DockPanel>
+        <DockPanel Grid.Row="0" Grid.Column="1">
+            
+        </DockPanel>
     </Grid>
 </Window>
