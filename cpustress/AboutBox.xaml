@@ -18,7 +18,7 @@
         </TextBlock>
         <TextBlock>
             <LineBreak/>
-            <Hyperlink NavigateUri="https://github.com/angeleno/cpustress"
+            <Hyperlink NavigateUri="https://github.com/sarangxyz/cpustress"
                        RequestNavigate="Hyperlink_RequestNavigate">
                 https://github.com/angeleno/cpustress
             </Hyperlink>
